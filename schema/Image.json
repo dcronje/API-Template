@@ -1,0 +1,18 @@
+{
+  "plural": "Images",
+  "singular": "Image",
+  "version": 2,
+  "implements": [
+    "File"
+  ],
+  "type": "MODEL",
+  "hasStorage": true,
+  "requiresMutations": true,
+  "requiresQueries": true,
+  "names": {
+    "UCFSingular": "Image",
+    "LCFSingular": "image",
+    "UCFPlural": "Images",
+    "LCFPlural": "images"
+  }
+}

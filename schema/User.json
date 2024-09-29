@@ -1,0 +1,16 @@
+{
+  "singular": "User",
+  "plural": "Users",
+  "implements": [],
+  "type": "INTERFACE",
+  "hasStorage": true,
+  "names": {
+    "UCFSingular": "User",
+    "LCFSingular": "user",
+    "UCFPlural": "Users",
+    "LCFPlural": "users"
+  },
+  "version": 2,
+  "requiresMutations": false,
+  "requiresQueries": true
+}

@@ -1,0 +1,16 @@
+{
+  "singular": "User device",
+  "plural": "User devices",
+  "implements": [],
+  "type": "MODEL",
+  "hasStorage": true,
+  "names": {
+    "UCFSingular": "UserDevice",
+    "LCFSingular": "userDevice",
+    "UCFPlural": "UserDevices",
+    "LCFPlural": "userDevices"
+  },
+  "version": 2,
+  "requiresMutations": false,
+  "requiresQueries": false
+}

@@ -1,0 +1,16 @@
+{
+  "singular": "User role",
+  "plural": "User roles",
+  "implements": [],
+  "type": "MODEL",
+  "hasStorage": true,
+  "names": {
+    "UCFSingular": "UserRole",
+    "LCFSingular": "userRole",
+    "UCFPlural": "UserRoles",
+    "LCFPlural": "userRoles"
+  },
+  "version": 2,
+  "requiresMutations": true,
+  "requiresQueries": true
+}

@@ -1,0 +1,79 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "lib": [
+      "es2017",
+      "esnext"
+    ],
+    "sourceMap": true,
+    // "outFile": "./",                       /* Concatenate and emit output to single file. */
+    "outDir": "./build",
+    // "rootDir": "./",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+    "strict": true,
+    "moduleResolution": "node",
+    "baseUrl": "src/",
+    "jsx": "react",
+    "skipLibCheck": true,
+    "paths": {
+      "@generated/*": [
+        "generated/*"
+      ],
+      "@models/*": [
+        "models/*"
+      ],
+      "@queues/*": [
+        "queues/*"
+      ],
+      "@sagas/*": [
+        "sagas/*"
+      ],
+      "@apps/*": [
+        "apps/*"
+      ],
+      "@lib/*": [
+        "lib/*"
+      ],
+      "@tests/*": [
+        "tests/*"
+      ],
+      "@schema/*": [
+        "schema/*"
+      ],
+      "@GQLtypes/*": [
+        "schema/types/*"
+      ],
+      "@GQLscalars/*": [
+        "schema/scalars/*"
+      ],
+      "@GQLdirectives/*": [
+        "schema/directives/*"
+      ],
+      "@GQLglobals/*": [
+        "schema/globals/*"
+      ],
+      "@root/*": [
+        "*"
+      ]
+    },
+    "resolveJsonModule": false,
+    "allowJs": false,
+    "typeRoots": [
+      "./src/types",
+      "./node_modules/@types"
+    ],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/importer/*",
+    "src/tests/*",
+    "test",
+    "peon"
+  ],
+}

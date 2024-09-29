@@ -1,0 +1,16 @@
+{
+  "singular": "Permission",
+  "plural": "Permissions",
+  "implements": [],
+  "type": "MODEL",
+  "hasStorage": true,
+  "names": {
+    "UCFSingular": "Permission",
+    "LCFSingular": "permission",
+    "UCFPlural": "Permissions",
+    "LCFPlural": "permissions"
+  },
+  "version": 2,
+  "requiresMutations": false,
+  "requiresQueries": true
+}

@@ -1,0 +1,16 @@
+{
+  "plural": "File Categories",
+  "singular": "File Category",
+  "version": 2,
+  "implements": [],
+  "type": "MODEL",
+  "hasStorage": true,
+  "requiresMutations": true,
+  "requiresQueries": true,
+  "names": {
+    "UCFSingular": "FileCategory",
+    "LCFSingular": "fileCategory",
+    "UCFPlural": "FileCategories",
+    "LCFPlural": "fileCategories"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "standard",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "env": {
+    "browser": false
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "no-unused-vars": "off",
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": true,
+        "classes": false,
+        "variables": true,
+        "allowNamedExports": false
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": false,
+        "varsIgnorePattern": "^type$",
+        "argsIgnorePattern": "^type$"
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "warn",
+      {
+        "selector": "variable",
+        "format": [
+          "camelCase",
+          "UPPER_CASE"
+        ],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow"
+      },
+      {
+        "selector": "typeLike",
+        "format": [
+          "PascalCase"
+        ]
+      }
+    ],
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "all"
+      }
+    ],
+    "@typescript-eslint/no-empty-interface": 1,
+    "@typescript-eslint/no-explicit-any": 1,
+    "@typescript-eslint/member-delimiter-style": [
+      1,
+      {
+        "multiline": {
+          "delimiter": "none",
+          "requireLast": true
+        },
+        "singleline": {
+          "delimiter": "comma",
+          "requireLast": false
+        }
+      }
+    ],
+    "semi": [
+      2,
+      "never"
+    ],
+    "comma-dangle": [
+      2,
+      "always-multiline"
+    ],
+    "space-infix-ops": 0,
+    "max-len": [
+      2,
+      1000,
+      2
+    ],
+    "indent": [
+      "error",
+      2,
+      {
+        "MemberExpression": "off",
+        "SwitchCase": 1
+      }
+    ],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "padded-blocks": [
+      2,
+      {
+        "classes": "always"
+      }
+    ]
+  }
+}

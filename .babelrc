@@ -1,0 +1,56 @@
+{
+  "targets": {
+    "node": "11.3",
+  },
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import",
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ],
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-proposal-unicode-property-regex",
+    "@babel/plugin-transform-destructuring",
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src"
+        ],
+        "alias": {
+          "@models/*": "./src/models",
+          "@lib": "./src/lib",
+          "@root": "./src",
+        }
+      }
+    ],
+    [
+      "transform-modern-regexp",
+      {
+        "features": [
+          "namedCapturingGroups",
+          "xFlag"
+        ]
+      }
+    ],
+  ],
+  "presets": [
+    "@babel/typescript",
+    "@babel/env"
+  ],
+}

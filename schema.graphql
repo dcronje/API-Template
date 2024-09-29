@@ -1,0 +1,1952 @@
+directive @Permissions(types: [String]!) on FIELD_DEFINITION | INPUT_FIELD_DEFINITION | OBJECT
+
+directive @isAuthenticated on OBJECT | FIELD_DEFINITION
+
+directive @CacheControl(maxAge: Int, scope: CacheControlScope) on FIELD_DEFINITION | OBJECT | INTERFACE
+
+directive @NoCache on FIELD_DEFINITION | OBJECT | INTERFACE
+
+directive @cacheWarming on QUERY
+
+directive @condenseCache on QUERY
+
+directive @defer(if: Boolean, label: String) on FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+directive @recomposeCache on QUERY
+
+directive @stream(if: Boolean, label: String, initialCount: Int = 0) on FIELD
+
+"""Represents a Citizen in the system"""
+enum GenderEnum {
+  """Male"""
+  MALE
+  """Female"""
+  FEMALE
+}
+
+type Citizen {
+  """The Citizen's ID"""
+  id: ID!
+  firstNames: String!
+  lastName: String!
+  idNumber: String!
+  gender: GenderEnum!
+  dateOfBirth: Date!
+  address: String!
+  votes(skip: Int, limit: Int, filters: VoterFilters, order: [VoterOrder]): VoterList!
+  voteCount: Int!
+  """The creation date of the Citizen"""
+  createdAt: DateTime
+  """The update date of the Citizen"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum CitizenOrderEnum {
+  """Name"""
+  NAME
+  """Polling Station"""
+  POLLING_STATION
+  """Ward"""
+  WARD
+  """Local Authority"""
+  LOCAL_AUTHORITY
+  """Constituency"""
+  CONSTITUENCY
+  """District"""
+  DISTRICT
+  """Province"""
+  PROVINCE
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""Citizen filtering options"""
+input CitizenFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  votes: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Citizen ordering options"""
+input CitizenOrder {
+  """Order field"""
+  field: CitizenOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type CitizenList {
+  """A list of Properties"""
+  list: [Citizen!]!
+  """A count of Properties"""
+  count: Int!
+  """Number of Citizen records skipped"""
+  skip: Int!
+  """Number of Citizen records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new Citizen"""
+input AddCitizenInput {
+  firstNames: String!
+  lastName: String!
+  idNumber: String!
+  gender: GenderEnum!
+  dateOfBirth: Date!
+  address: String!
+}
+
+"""Fields to update an existing Citizen"""
+input UpdateCitizenInput {
+  firstNames: String
+  lastName: String
+  idNumber: String
+  gender: GenderEnum
+  dateOfBirth: Date
+  address: String
+}
+
+"""Represents a Constituency in the system"""
+type Constituency {
+  """The Constituency's ID"""
+  id: ID!
+  name: String!
+  province: Province!
+  district: District!
+  pollingStations(skip: Int, limit: Int, filters: PollingStationFilters, order: [PollingStationOrder]): PollingStationList!
+  pollingStationCount: Int!
+  """The creation date of the Constituency"""
+  createdAt: DateTime
+  """The update date of the Constituency"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum ConstituencyOrderEnum {
+  """Name"""
+  NAME
+  """District"""
+  DISTRICT
+  """Province"""
+  PROVINCE
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""Constituency filtering options"""
+input ConstituencyFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  districts: [ID!]
+  provinces: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Constituency ordering options"""
+input ConstituencyOrder {
+  """Order field"""
+  field: ConstituencyOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type ConstituencyList {
+  """A list of Properties"""
+  list: [Constituency]!
+  """A count of Properties"""
+  count: Int!
+  """Number of Constituency records skipped"""
+  skip: Int!
+  """Number of Constituency records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new Constituency"""
+input AddConstituencyInput {
+  name: String!
+  districtId: ID!
+  description: String
+}
+
+"""Fields to update an existing Constituency"""
+input UpdateConstituencyInput {
+  name: String
+  districtId: ID
+  description: String
+}
+
+enum RegisteredDeviceTypeEnum {
+  """Browser"""
+  BROWSER
+  """Android"""
+  ANDROID
+  """iOS"""
+  IOS
+}
+
+input RegisterDeviceInput {
+  userAgent: String
+  type: RegisteredDeviceTypeEnum!
+}
+
+"""Represents a Device in the system"""
+type Device {
+  """The Devices ID"""
+  id: ID!
+  """The Devices type"""
+  type: RegisteredDeviceTypeEnum!
+  """The devices UserAgent String"""
+  userAgent: String
+  userDevices: [UserDevice!]!
+  """The creation date of the Device"""
+  createdAt: DateTime
+  """The update date of the Device"""
+  updatedAt: DateTime
+}
+
+"""Properties list object"""
+type DeviceList {
+  """A list of Properties"""
+  list: [Device]!
+  """A count of Properties"""
+  count: Int!
+  """Number of Device records skipped"""
+  skip: Int!
+  """Number of Device records returned"""
+  limit: Int!
+}
+
+type DeviceInfo {
+  id: ID!
+  isBot: Boolean!
+}
+
+"""Represents a District in the system"""
+type District {
+  """The District's ID"""
+  id: ID!
+  name: String!
+  province: Province!
+  constituencies(skip: Int, limit: Int, filters: ConstituencyFilters, order: [ConstituencyOrder]): ConstituencyList!
+  constituencyCount: Int!
+  pollingStationCount: Int!
+  """The creation date of the District"""
+  createdAt: DateTime
+  """The update date of the District"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum DistrictOrderEnum {
+  """Name"""
+  NAME
+  """Province"""
+  PROVINCE
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""District filtering options"""
+input DistrictFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  provinces: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""District ordering options"""
+input DistrictOrder {
+  """Order field"""
+  field: DistrictOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type DistrictList {
+  """A list of Properties"""
+  list: [District]!
+  """A count of Properties"""
+  count: Int!
+  """Number of District records skipped"""
+  skip: Int!
+  """Number of District records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new District"""
+input AddDistrictInput {
+  name: String!
+  provinceId: ID!
+  description: String
+}
+
+"""Fields to update an existing District"""
+input UpdateDistrictInput {
+  name: String
+  provinceId: ID
+  description: String
+}
+
+"""Represents a Election in the system"""
+type Election {
+  """The Election's ID"""
+  id: ID!
+  name: String!
+  year: String!
+  voters(skip: Int, limit: Int, filters: VoterFilters, order: [VoterOrder]): VoterList!
+  voterCount: Int!
+  """The creation date of the Election"""
+  createdAt: DateTime
+  """The update date of the Election"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum ElectionOrderEnum {
+  """Name"""
+  NAME
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""Election filtering options"""
+input ElectionFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Election ordering options"""
+input ElectionOrder {
+  """Order field"""
+  field: ElectionOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type ElectionList {
+  """A list of Properties"""
+  list: [Election!]!
+  """A count of Properties"""
+  count: Int!
+  """Number of Election records skipped"""
+  skip: Int!
+  """Number of Election records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new Election"""
+input AddElectionInput {
+  name: String!
+  description: String
+}
+
+"""Fields to update an existing Election"""
+input UpdateElectionInput {
+  name: String
+  description: String
+}
+
+input FileUploadInput {
+  file: Upload!
+  name: String!
+  categories: [ID]
+}
+
+"""Represents a File in the system"""
+interface File {
+  """The File's ID"""
+  id: ID!
+  name: String!
+  location: String!
+  mimetype: String!
+  extension: String!
+  categories: [FileCategory]
+  """The creation date of the Model"""
+  createdAt: DateTime
+  """The update date of the Model"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum FileOrderEnum {
+  """Name"""
+  NAME
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""File filtering options"""
+input FileFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  categories: [ID]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""File ordering options"""
+input FileOrder {
+  """Order field"""
+  field: FileOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type FileList {
+  """A list of Properties"""
+  list: [File]!
+  """A count of Properties"""
+  count: Int!
+  """Number of File records skipped"""
+  skip: Int!
+  """Number of File records returned"""
+  limit: Int!
+}
+
+"""Represents a FileCategory in the system"""
+type FileCategory {
+  """The FileCategory's ID"""
+  id: ID!
+  name: String!
+  files: [File]
+  """The creation date of the FileCategory"""
+  createdAt: DateTime
+  """The update date of the FileCategory"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum FileCategoryOrderEnum {
+  """Name"""
+  NAME
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""FileCategory filtering options"""
+input FileCategoryFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""FileCategory ordering options"""
+input FileCategoryOrder {
+  """Order field"""
+  field: FileCategoryOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type FileCategoryList {
+  """A list of Properties"""
+  list: [FileCategory]!
+  """A count of Properties"""
+  count: Int!
+  """Number of FileCategory records skipped"""
+  skip: Int!
+  """Number of FileCategory records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new FileCategory"""
+input AddFileCategoryInput {
+  name: String!
+}
+
+"""Fields to update an existing FileCategory"""
+input UpdateFileCategoryInput {
+  name: String
+}
+
+enum ImageScaleEnum {
+  """Scale to Cover"""
+  COVER
+  """Scale to Fit"""
+  FIT
+  """Scale to Contain"""
+  CONTAIN
+}
+
+enum ImageEncodingEnum {
+  """WebP"""
+  WEBP
+  """PNG"""
+  PNG
+  """JPEG"""
+  JPEG
+  """SVG"""
+  SVG
+}
+
+enum ImageTransformTypeEnum {
+  """Blur"""
+  BLUR
+  """Gaussian Blur"""
+  GAUSSIAN_BLUR
+  """Grey Scale"""
+  GREY_SCALE
+  """Posterize"""
+  POSTERIZE
+  """Sepia"""
+  SEPIA
+  """Pixelate"""
+  PIXELATE
+  """Opacity"""
+  OPACITY
+  """CMYK Color Space"""
+  CMYK
+}
+
+input ImageTransform {
+  type: ImageTransformTypeEnum!
+  value: Float
+}
+
+type ImageInfo {
+  type: String!
+  width: Int!
+  height: Int!
+}
+
+"""Represents a Image in the system"""
+type Image implements File {
+  """The Image's ID"""
+  id: ID!
+  name: String!
+  alt: String!
+  staticId: String
+  location: String!
+  mimetype: String!
+  extension: String!
+  encoding: ImageEncodingEnum!
+  imageInfo: ImageInfo!
+  categories: [FileCategory]
+  hasTransparency: Boolean!
+  isVector: Boolean!
+  isDefault: Boolean!
+  url(width: Int, height: Int, scale: ImageScaleEnum, transforms: [ImageTransform], encoding: ImageEncodingEnum): URI
+  """The creation date of the Image"""
+  createdAt: DateTime
+  """The update date of the Image"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum ImageOrderEnum {
+  """Name"""
+  NAME
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""Image filtering options"""
+input ImageFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  categories: [ID]
+  encoding: [ImageEncodingEnum!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Image ordering options"""
+input ImageOrder {
+  """Order field"""
+  field: ImageOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type ImageList {
+  """A list of Properties"""
+  list: [Image]!
+  """A count of Properties"""
+  count: Int!
+  """Number of Image records skipped"""
+  skip: Int!
+  """Number of Image records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new Image"""
+input AddImageInput {
+  name: String!
+  alt: String
+  staticId: String
+  file: Upload!
+  categories: [ID]
+  hasTransparency: Boolean
+}
+
+"""Fields to update an existing Image"""
+input UpdateImageInput {
+  name: String
+  alt: String
+  staticId: String
+  categories: [ID]
+  hasTransparency: Boolean
+}
+
+"""Represents a LocalAuthority in the system"""
+type LocalAuthority {
+  """The LocalAuthority's ID"""
+  id: ID!
+  name: String!
+  wards(skip: Int, limit: Int, filters: WardFilters, order: [WardOrder]): WardList!
+  wardCount: Int!
+  pollingStationCount: Int!
+  """The creation date of the LocalAuthority"""
+  createdAt: DateTime
+  """The update date of the LocalAuthority"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum LocalAuthorityOrderEnum {
+  """Name"""
+  NAME
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""LocalAuthority filtering options"""
+input LocalAuthorityFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""LocalAuthority ordering options"""
+input LocalAuthorityOrder {
+  """Order field"""
+  field: LocalAuthorityOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type LocalAuthorityList {
+  """A list of Properties"""
+  list: [LocalAuthority]!
+  """A count of Properties"""
+  count: Int!
+  """Number of LocalAuthority records skipped"""
+  skip: Int!
+  """Number of LocalAuthority records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new LocalAuthority"""
+input AddLocalAuthorityInput {
+  name: String!
+  description: String
+}
+
+"""Fields to update an existing LocalAuthority"""
+input UpdateLocalAuthorityInput {
+  name: String
+  description: String
+}
+
+"""The type of permission"""
+enum PermissionTypeEnum {
+  """Static Permission (Specified in Code)"""
+  STATIC_PERMISSION
+  """Dynamic Permission (Specified in Schema)"""
+  DYNAMIC_PERMISSION
+}
+
+"""Represents a Permission in the system"""
+type Permission {
+  """The Permission's ID"""
+  id: ID!
+  name: String!
+  identifier: String!
+  description: String!
+  roles: [Role]
+  isOwned: Boolean
+  objectType: String
+  """The creation date of the Model"""
+  createdAt: DateTime
+  """The update date of the Model"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum PermissionOrderEnum {
+  """Name"""
+  NAME
+  TYPE
+  MODULE
+  OBJECT_TYPE
+}
+
+"""Permission filtering options"""
+input PermissionFilters {
+  id: ID
+  ids: [ID!]
+  search: String
+  types: [PermissionTypeEnum]
+}
+
+"""Permission ordering options"""
+input PermissionOrder {
+  """Order field"""
+  field: PermissionOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type PermissionList {
+  """A list of Properties"""
+  list: [Permission]!
+  """A count of Properties"""
+  count: Int!
+  """Number of Permission records skipped"""
+  skip: Int!
+  """Number of Permission records returned"""
+  limit: Int!
+}
+
+"""Represents a PollingStation in the system"""
+type PollingStation {
+  """The PollingStation's ID"""
+  id: ID!
+  name: String!
+  province: Province!
+  district: District!
+  constituency: Constituency!
+  localAuthority: LocalAuthority!
+  ward: Ward!
+  voters(skip: Int, limit: Int, filters: VoterFilters, order: [VoterOrder]): VoterList!
+  voterCount: Int!
+  """The creation date of the PollingStation"""
+  createdAt: DateTime
+  """The update date of the PollingStation"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum PollingStationOrderEnum {
+  """Name"""
+  NAME
+  """Ward"""
+  WARD
+  """Local Authority"""
+  LOCAL_AUTHORITY
+  """Constituency"""
+  CONSTITUENCY
+  """District"""
+  DISTRICT
+  """Province"""
+  PROVINCE
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""PollingStation filtering options"""
+input PollingStationFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  wards: [ID!]
+  localAuthorities: [ID!]
+  constituencies: [ID!]
+  districts: [ID!]
+  provinces: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""PollingStation ordering options"""
+input PollingStationOrder {
+  """Order field"""
+  field: PollingStationOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type PollingStationList {
+  """A list of Properties"""
+  list: [PollingStation]!
+  """A count of Properties"""
+  count: Int!
+  """Number of PollingStation records skipped"""
+  skip: Int!
+  """Number of PollingStation records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new PollingStation"""
+input AddPollingStationInput {
+  name: String!
+  constituencyId: ID!
+  wardId: ID!
+  description: String
+}
+
+"""Fields to update an existing PollingStation"""
+input UpdatePollingStationInput {
+  name: String
+  constituencyId: ID
+  wardId: ID
+  description: String
+}
+
+"""Represents a Province in the system"""
+type Province {
+  """The Province's ID"""
+  id: ID!
+  name: String!
+  districts(skip: Int, limit: Int, filters: DistrictFilters, order: [DistrictOrder]): DistrictList!
+  districtCount: Int!
+  constituencyCount: Int!
+  pollingStationCount: Int!
+  """The creation date of the Province"""
+  createdAt: DateTime
+  """The update date of the Province"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum ProvinceOrderEnum {
+  """Name"""
+  NAME
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""Province filtering options"""
+input ProvinceFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Province ordering options"""
+input ProvinceOrder {
+  """Order field"""
+  field: ProvinceOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type ProvinceList {
+  """A list of Properties"""
+  list: [Province]!
+  """A count of Properties"""
+  count: Int!
+  """Number of Province records skipped"""
+  skip: Int!
+  """Number of Province records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new Province"""
+input AddProvinceInput {
+  name: String!
+  description: String
+}
+
+"""Fields to update an existing Province"""
+input UpdateProvinceInput {
+  name: String
+  description: String
+}
+
+"""Represents a Role in the system"""
+type Role {
+  """The Role's ID"""
+  id: ID!
+  name: String!
+  description: String
+  permissions: [Permission]
+  users: [UserRole]
+  """The creation date of the Role"""
+  createdAt: DateTime
+  """The update date of the Role"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum RoleOrderEnum {
+  """Name"""
+  NAME
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""Role filtering options"""
+input RoleFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Role ordering options"""
+input RoleOrder {
+  """Order field"""
+  field: RoleOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type RoleList {
+  """A list of Properties"""
+  list: [Role]!
+  """A count of Properties"""
+  count: Int!
+  """Number of Role records skipped"""
+  skip: Int!
+  """Number of Role records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new Role"""
+input AddRoleInput {
+  name: String!
+  description: String
+  permissions: [String]
+}
+
+"""Fields to update an existing Role"""
+input UpdateRoleInput {
+  name: String
+  description: String
+  permissions: [String]
+  updatedAt: DateTime
+}
+
+"""A Users Title"""
+enum TitleEnum {
+  """Mr"""
+  MR
+  """Ms"""
+  MS
+  """Mrs"""
+  MRS
+}
+
+"""Represents a User in the system"""
+interface User {
+  """The User's ID"""
+  id: ID!
+  title: TitleEnum
+  firstName: String!
+  lastName: String!
+  name: String!
+  email: Email!
+  emailIsVerified: Boolean
+  userDevices: [UserDevice]
+  userRoles: [UserRole]
+  currentDevice: Device
+  """The creation date of the User"""
+  createdAt: DateTime
+  """The update date of the User"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum UserOrderEnum {
+  """First Name"""
+  FIRST_NAME
+  """Last Name"""
+  LAST_NAME
+  """Name"""
+  NAME
+  EMAIL
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""User filtering options"""
+input UserFilters {
+  id: ID
+  ids: [ID!]
+  search: String
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+  hasAcceptedInvite: Boolean
+  isInvited: Boolean
+}
+
+"""User ordering options"""
+input UserOrder {
+  """Order field"""
+  field: UserOrderEnum!
+  """Order direction"""
+  direction: OrderDirectionEnum!
+}
+
+"""Properties list object"""
+type UserList {
+  """A list of Properties"""
+  list: [User]!
+  """A count of Properties"""
+  count: Int!
+  """Number of User records skipped"""
+  skip: Int!
+  """Number of User records returned"""
+  limit: Int!
+}
+
+"""Represents a UserDevice in the system"""
+type UserDevice {
+  """The UserDevice's ID"""
+  id: ID!
+  active: Boolean!
+  user: User!
+  device: Device!
+  """The creation date of the UserDevice"""
+  createdAt: DateTime
+  """The update date of the UserDevice"""
+  updatedAt: DateTime
+}
+
+enum UserHistoryTypeEnum {
+  """Sign Up Event"""
+  USER_SIGN_UP_EVENT
+  """Details Event"""
+  USER_DETAILS_EVENT
+}
+
+enum UserDetailsEventEnum {
+  """General"""
+  GENERAL
+  """Password"""
+  PASSWORD
+  """Forgot Password"""
+  FORGOT_PASSWORD
+  """Verification"""
+  VERIFICATION
+}
+
+enum UserHistoryEventEnum {
+  """Sign Up Event"""
+  USER_SIGN_UP_EVENT
+  """Details Event"""
+  USER_DETAILS_EVENT
+  """General"""
+  GENERAL
+  """Password"""
+  PASSWORD
+  """Forgot Password"""
+  FORGOT_PASSWORD
+  """Verification"""
+  VERIFICATION
+}
+
+"""Represents a UserHistory in the system"""
+type UserHistory {
+  """The UserHistory's ID"""
+  id: ID!
+  additionalInfo: JSON
+  admin: User
+  type: UserHistoryTypeEnum!
+  event: UserHistoryEventEnum
+  user: User!
+  """The creation date of the UserHistory"""
+  createdAt: DateTime
+  """The update date of the UserHistory"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum UserHistoryOrderEnum {
+  """Type"""
+  TYPE
+  """Event"""
+  EVENT
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""UserHistory filtering options"""
+input UserHistoryFilters {
+  id: ID
+  ids: [ID!]
+  types: [UserHistoryTypeEnum!]
+  events: [UserHistoryEventEnum!]
+  users: [ID!]
+  admins: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""UserHistory ordering options"""
+input UserHistoryOrder {
+  """Order field"""
+  field: UserHistoryOrderEnum!
+  """Order direction"""
+  direction: OrderDirectionEnum!
+}
+
+"""Properties list object"""
+type UserHistoryList {
+  """A list of Properties"""
+  list: [UserHistory]!
+  """A count of Properties"""
+  count: Int!
+  """Number of UserHistory records skipped"""
+  skip: Int!
+  """Number of UserHistory records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new UserHistory"""
+input AddUserHistoryInput {
+  additionalInfo: JSON
+  type: UserHistoryTypeEnum!
+  event: UserHistoryEventEnum
+  user: ID!
+  admin: ID
+}
+
+"""Fields to update an existing UserHistory"""
+input UpdateUserHistoryInput {
+  additionalInfo: JSON
+  type: UserHistoryTypeEnum
+  event: UserHistoryEventEnum
+  admin: ID
+}
+
+"""Represents a UserRole in the system"""
+type UserRole {
+  """The UserRole's ID"""
+  id: ID!
+  user: User!
+  role: Role!
+  """The creation date of the UserRole"""
+  createdAt: DateTime
+  """The update date of the UserRole"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum UserRoleOrderEnum {
+  """Name"""
+  NAME
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""UserRole filtering options"""
+input UserRoleFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  users: [ID!]
+  roles: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""UserRole ordering options"""
+input UserRoleOrder {
+  """Order field"""
+  field: UserRoleOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type UserRoleList {
+  """A list of Properties"""
+  list: [UserRole]!
+  """A count of Properties"""
+  count: Int!
+  """Number of UserRole records skipped"""
+  skip: Int!
+  """Number of UserRole records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new UserRole"""
+input AddUserRoleInput {
+  user: ID!
+  role: ID!
+}
+
+input UpdateUserRoleInput {
+  user: ID!
+  role: ID!
+}
+
+"""Represents a Voter in the system"""
+type Voter {
+  """The Voter's ID"""
+  id: ID!
+  name: String!
+  election: Election!
+  citizen: Citizen!
+  pollingStation: PollingStation!
+  """The creation date of the Voter"""
+  createdAt: DateTime
+  """The update date of the Voter"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum VoterOrderEnum {
+  """Name"""
+  NAME
+  """Election"""
+  ELECTION
+  """Polling Station"""
+  POLLING_STATION
+  """Citizen"""
+  CITIZEN
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""Voter filtering options"""
+input VoterFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  elections: [ID!]
+  pollingStations: [ID!]
+  citizens: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Voter ordering options"""
+input VoterOrder {
+  """Order field"""
+  field: VoterOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type VoterList {
+  """A list of Properties"""
+  list: [Voter!]!
+  """A count of Properties"""
+  count: Int!
+  """Number of Voter records skipped"""
+  skip: Int!
+  """Number of Voter records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new Voter"""
+input AddVoterInput {
+  name: String!
+  description: String
+}
+
+"""Fields to update an existing Voter"""
+input UpdateVoterInput {
+  name: String
+  description: String
+}
+
+"""Represents a VoterRole in the system"""
+type VoterRole {
+  """The VoterRole's ID"""
+  id: ID!
+  name: String!
+  """The creation date of the VoterRole"""
+  createdAt: DateTime
+  """The update date of the VoterRole"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum VoterRoleOrderEnum {
+  """Name"""
+  NAME
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""VoterRole filtering options"""
+input VoterRoleFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""VoterRole ordering options"""
+input VoterRoleOrder {
+  """Order field"""
+  field: VoterRoleOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type VoterRoleList {
+  """A list of Properties"""
+  list: [VoterRole!]!
+  """A count of Properties"""
+  count: Int!
+  """Number of VoterRole records skipped"""
+  skip: Int!
+  """Number of VoterRole records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new VoterRole"""
+input AddVoterRoleInput {
+  name: String!
+  description: String
+}
+
+"""Fields to update an existing VoterRole"""
+input UpdateVoterRoleInput {
+  name: String
+  description: String
+}
+
+"""Represents a Ward in the system"""
+type Ward {
+  """The Ward's ID"""
+  id: ID!
+  name: String!
+  localAuthority: LocalAuthority!
+  pollingStations(skip: Int, limit: Int, filters: PollingStationFilters, order: [PollingStationOrder]): PollingStationList!
+  pollingStationCount: Int!
+  """The creation date of the Ward"""
+  createdAt: DateTime
+  """The update date of the Ward"""
+  updatedAt: DateTime
+}
+
+"""Fields available to order Properties"""
+enum WardOrderEnum {
+  """Name"""
+  NAME
+  """Local Authority"""
+  LOCAL_AUTHORITY
+  """Created At"""
+  CREATED_AT
+  """Updated At"""
+  UPDATED_AT
+}
+
+"""Ward filtering options"""
+input WardFilters {
+  search: String
+  id: ID
+  ids: [ID!]
+  localAuthorities: [ID!]
+  minCreatedAt: DateTime
+  maxCreatedAt: DateTime
+  createdAt: DateTime
+  minUpdatedAt: DateTime
+  maxUpdatedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Ward ordering options"""
+input WardOrder {
+  """Order field"""
+  field: WardOrderEnum
+  """Order direction"""
+  direction: OrderDirectionEnum
+}
+
+"""Properties list object"""
+type WardList {
+  """A list of Properties"""
+  list: [Ward]!
+  """A count of Properties"""
+  count: Int!
+  """Number of Ward records skipped"""
+  skip: Int!
+  """Number of Ward records returned"""
+  limit: Int!
+}
+
+"""Fields to add a new Ward"""
+input AddWardInput {
+  name: String!
+  localAuthorityId: ID!
+  description: String
+}
+
+"""Fields to update an existing Ward"""
+input UpdateWardInput {
+  name: String
+  localAuthorityId: ID
+  description: String
+}
+
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+enum ApiScalarDataTypeEnum {
+  """Integer"""
+  INT
+  """Float"""
+  FLOAT
+  """Double"""
+  DOUBLE
+  """Boolean"""
+  BOOLEAN
+  """Date"""
+  DATE
+  """Date Time"""
+  DATE_TIME
+  """Time"""
+  TIME
+  """Week"""
+  WEEK
+  """Month"""
+  MONTH
+  """Year"""
+  YEAR
+  """String"""
+  STRING
+  """Text"""
+  TEXT
+  """Hyper Text"""
+  HYPERTEXT
+  """Email"""
+  EMAIL
+  """Phone"""
+  PHONE
+  """Color"""
+  COLOR
+  """Link"""
+  URI
+}
+
+"""Chronological Period Type"""
+enum ChronologicalPeriodTypeEnum {
+  """Daily"""
+  DAILY
+  """Weekly"""
+  WEEKLY
+  """Monthly"""
+  MONTHLY
+  """Yearly"""
+  YEARLY
+}
+
+"""Chronological Unit Type"""
+enum ChronologicalUnitTypeEnum {
+  """Minute(s)"""
+  MINUTE
+  """Hour(s)"""
+  HOUR
+  """Day(s)"""
+  DAY
+  """Week(s)"""
+  WEEK
+  """Month(s)"""
+  MONTH
+  """Year(s)"""
+  YEAR
+}
+
+"""Week Days"""
+enum WeekDayEnum {
+  """Monday"""
+  MONDAY
+  """Tuesday"""
+  TUESDAY
+  """Wednesday"""
+  WEDNESDAY
+  """Thursday"""
+  THURSDAY
+  """Friday"""
+  FRIDAY
+  """Saturday"""
+  SATURDAY
+  """Sunday"""
+  SUNDAY
+}
+
+"""Month Weeks"""
+enum MonthWeekEnum {
+  """1st"""
+  FIRST
+  """2nd"""
+  SECOND
+  """3rd"""
+  THIRD
+  """4th"""
+  FOURTH
+}
+
+"""YearMonths"""
+enum YearMonthsEnum {
+  """January"""
+  JANUARY
+  """February"""
+  FEBRUARY
+  """March"""
+  MARCH
+  """April"""
+  APRIL
+  """May"""
+  MAY
+  """June"""
+  JUNE
+  """July"""
+  JULY
+  """August"""
+  AUGUST
+  """September"""
+  SEPTEMBER
+  """October"""
+  OCTOBER
+  """November"""
+  NOVEMBER
+  """December"""
+  DECEMBER
+}
+
+enum OrderDirectionEnum {
+  """Order Ascending"""
+  ASC
+  """Order Descending"""
+  DESC
+}
+
+enum UnitTypeEnum {
+  """Kilogram"""
+  KG
+  """Gram"""
+  G
+  """Milligram"""
+  MG
+  """Litre"""
+  L
+  """Milliliter"""
+  ML
+  """Portion"""
+  PORTION
+  """Pinch"""
+  PINCH
+  """Unit"""
+  UNIT
+  """Table Spoon"""
+  TBSP
+  """Tea Spoon"""
+  TSP
+  """Piece"""
+  PIECE
+  """Drained Gram"""
+  DG
+}
+
+input CacheKeyInput {
+  type: String!
+  id: ID
+}
+
+type EnumValue {
+  title: String!
+  value: String!
+}
+
+type EnumDescription {
+  name: String!
+  description: String!
+  values: [EnumValue]
+}
+
+type ClientInterfaceType {
+  name: String!
+}
+
+type ClientInterface {
+  kind: String!
+  name: String!
+  possibleTypes: [ClientInterfaceType]
+}
+
+scalar Color
+
+scalar Date
+
+scalar DateTime
+
+scalar Domain
+
+scalar Email
+
+scalar ExpiryMonth
+
+scalar ExpiryYear
+
+scalar JSON
+
+scalar JSONObject
+
+scalar JWT
+
+scalar Password
+
+scalar Phone
+
+scalar Point
+
+scalar Time
+
+scalar URI
+
+scalar Upload
+
+type Query {
+  """Get a list of Citizen with order and filtering options"""
+  allCitizens(skip: Int, limit: Int, filters: CitizenFilters, order: [CitizenOrder]): CitizenList!
+  """Get a specific Citizen by ID"""
+  oneCitizen(id: ID!): Citizen!
+  """Get a count of Citizen with filtering options"""
+  countCitizens(filters: CitizenFilters): Int!
+  """Get a list of Constituency with order and filtering options"""
+  allConstituencies(skip: Int, limit: Int, filters: ConstituencyFilters, order: [ConstituencyOrder]): ConstituencyList!
+  """Get a specific Constituency by ID"""
+  oneConstituency(id: ID!): Constituency!
+  """Get a count of Constituency with filtering options"""
+  countConstituencies(filters: ConstituencyFilters): Int!
+  """Get a list of District with order and filtering options"""
+  allDistricts(skip: Int, limit: Int, filters: DistrictFilters, order: [DistrictOrder]): DistrictList!
+  """Get a specific District by ID"""
+  oneDistrict(id: ID!): District!
+  """Get a count of District with filtering options"""
+  countDistricts(filters: DistrictFilters): Int!
+  """Get a list of Election with order and filtering options"""
+  allElections(skip: Int, limit: Int, filters: ElectionFilters, order: [ElectionOrder]): ElectionList!
+  """Get a specific Election by ID"""
+  oneElection(id: ID!): Election!
+  """Get a count of Election with filtering options"""
+  countElections(filters: ElectionFilters): Int!
+  """Get a list of Files with order and filtering options"""
+  allFiles(skip: Int, limit: Int, filters: FileFilters, order: [FileOrder]): FileList!
+  """Get a specific File by ID"""
+  oneFile(id: ID!): File!
+  """Get a count of File with filtering options"""
+  countFiles(filters: FileFilters): Int!
+  """Get a list of FileCategory with order and filtering options"""
+  allFileCategories(skip: Int, limit: Int, filters: FileCategoryFilters, order: [FileCategoryOrder]): FileCategoryList!
+  """Get a specific FileCategory by ID"""
+  oneFileCategory(id: ID!): FileCategory!
+  """Get a count of FileCategory with filtering options"""
+  countFileCategories(filters: FileCategoryFilters): Int!
+  """Get a list of Image with order and filtering options"""
+  allImages(skip: Int, limit: Int, filters: ImageFilters, order: [ImageOrder]): ImageList!
+  """Get a specific Image by ID"""
+  oneImage(id: ID!): Image!
+  """Get a count of Image with filtering options"""
+  countImages(filters: ImageFilters): Int!
+  """Get one stati image by identifier"""
+  staticImage(id: ID): Image!
+  """Get a list of LocalAuthority with order and filtering options"""
+  allLocalAuthorities(skip: Int, limit: Int, filters: LocalAuthorityFilters, order: [LocalAuthorityOrder]): LocalAuthorityList!
+  """Get a specific LocalAuthority by ID"""
+  oneLocalAuthority(id: ID!): LocalAuthority!
+  """Get a count of LocalAuthority with filtering options"""
+  countLocalAuthorities(filters: LocalAuthorityFilters): Int!
+  """Get a list of Permissions with order and filtering options"""
+  allPermissions(skip: Int, limit: Int, filters: PermissionFilters, order: [PermissionOrder]): PermissionList!
+  """Get a specific Permission by ID"""
+  onePermission(id: ID!): Permission!
+  """Get a count of Permission with filtering options"""
+  countPermissions(filters: PermissionFilters): Int!
+  """Get a list of PollingStation with order and filtering options"""
+  allPollingStations(skip: Int, limit: Int, filters: PollingStationFilters, order: [PollingStationOrder]): PollingStationList!
+  """Get a specific PollingStation by ID"""
+  onePollingStation(id: ID!): PollingStation!
+  """Get a count of PollingStation with filtering options"""
+  countPollingStations(filters: PollingStationFilters): Int!
+  """Get a list of Province with order and filtering options"""
+  allProvinces(skip: Int, limit: Int, filters: ProvinceFilters, order: [ProvinceOrder]): ProvinceList!
+  """Get a specific Province by ID"""
+  oneProvince(id: ID!): Province!
+  """Get a count of Province with filtering options"""
+  countProvinces(filters: ProvinceFilters): Int!
+  """Get a list of Role with order and filtering options"""
+  allRoles(skip: Int, limit: Int, filters: RoleFilters, order: [RoleOrder]): RoleList!
+  """Get a specific Role by ID"""
+  oneRole(id: ID!): Role!
+  """Get a count of Role with filtering options"""
+  countRoles(filters: RoleFilters): Int!
+  """Get a list of User with order and filtering options"""
+  allUsers(skip: Int, limit: Int, filters: UserFilters, order: [UserOrder]): UserList!
+  """Get a specific User by ID"""
+  oneUser(id: ID!): User!
+  """Get a count of User with filtering options"""
+  countUsers(filters: UserFilters): Int!
+  """Validate User Invite"""
+  validateInvite(token: JWT): User
+  """Get a list of UserHistory with order and filtering options"""
+  allUserHistory(skip: Int, limit: Int, filters: UserHistoryFilters, order: [UserHistoryOrder]): UserHistoryList!
+  """Get a specific UserHistory by ID"""
+  oneUserHistory(id: ID!): UserHistory!
+  """Get a count of UserHistory with filtering options"""
+  countUserHistory(filters: UserHistoryFilters): Int!
+  """Get a list of UserRole with order and filtering options"""
+  allUserRoles(skip: Int, limit: Int, filters: UserRoleFilters, order: [UserRoleOrder]): UserRoleList!
+  """Get a specific UserRole by ID"""
+  oneUserRole(id: ID!): UserRole!
+  """Get a count of UserRole with filtering options"""
+  countUserRoles(filters: UserRoleFilters): Int!
+  """Get a list of Voter with order and filtering options"""
+  allVoters(skip: Int, limit: Int, filters: VoterFilters, order: [VoterOrder]): VoterList!
+  """Get a specific Voter by ID"""
+  oneVoter(id: ID!): Voter!
+  """Get a count of Voter with filtering options"""
+  countVoters(filters: VoterFilters): Int!
+  """Get a list of VoterRole with order and filtering options"""
+  allVoterRoles(skip: Int, limit: Int, filters: VoterRoleFilters, order: [VoterRoleOrder]): VoterRoleList!
+  """Get a specific VoterRole by ID"""
+  oneVoterRole(id: ID!): VoterRole!
+  """Get a count of VoterRole with filtering options"""
+  countVoterRoles(filters: VoterRoleFilters): Int!
+  """Get a list of Ward with order and filtering options"""
+  allWards(skip: Int, limit: Int, filters: WardFilters, order: [WardOrder]): WardList!
+  """Get a specific Ward by ID"""
+  oneWard(id: ID!): Ward!
+  """Get a count of Ward with filtering options"""
+  countWards(filters: WardFilters): Int!
+  currentUser: User
+  getEnums(enums: [String]!): [EnumDescription]
+  getEnum(enum: String!): EnumDescription
+  getInputObjectConfig(name: String!): JSON
+  getDetailedInputObjectConfig(name: String!): JSON
+  getInterfaceTypes: [ClientInterface]
+}
+
+type Mutation {
+  """Add a new Citizen"""
+  addCitizen(input: AddCitizenInput!): Citizen!
+  """Update an existing Citizen"""
+  updateCitizen(id: ID!, input: UpdateCitizenInput!): Citizen!
+  """Delete a Citizen"""
+  removeCitizen(id: ID!): ID!
+  """Add a new Constituency"""
+  addConstituency(input: AddConstituencyInput!): Constituency!
+  """Update an existing Constituency"""
+  updateConstituency(id: ID!, input: UpdateConstituencyInput!): Constituency!
+  """Delete a Constituency"""
+  removeConstituency(id: ID!): ID!
+  """Register a new Device"""
+  registerDevice(input: RegisterDeviceInput!): DeviceInfo!
+  """Validate an existing device"""
+  validateDevice(token: String!): DeviceInfo
+  """Add a new District"""
+  addDistrict(input: AddDistrictInput!): District!
+  """Update an existing District"""
+  updateDistrict(id: ID!, input: UpdateDistrictInput!): District!
+  """Delete a District"""
+  removeDistrict(id: ID!): ID!
+  """Add a new Election"""
+  addElection(input: AddElectionInput!): Election!
+  """Update an existing Election"""
+  updateElection(id: ID!, input: UpdateElectionInput!): Election!
+  """Delete a Election"""
+  removeElection(id: ID!): ID!
+  """Add a new FileCategory"""
+  addFileCategory(input: AddFileCategoryInput!): FileCategory!
+  """Update an existing FileCategory"""
+  updateFileCategory(id: ID!, input: UpdateFileCategoryInput!): FileCategory!
+  """Delete a FileCategory"""
+  removeFileCategory(id: ID!): ID!
+  """Add a new Image"""
+  addImage(input: AddImageInput!): Image!
+  """Update an existing Image"""
+  updateImage(id: ID!, input: UpdateImageInput!): Image!
+  """Delete a Image"""
+  removeImage(id: ID!): ID!
+  """Add a new LocalAuthority"""
+  addLocalAuthority(input: AddLocalAuthorityInput!): LocalAuthority!
+  """Update an existing LocalAuthority"""
+  updateLocalAuthority(id: ID!, input: UpdateLocalAuthorityInput!): LocalAuthority!
+  """Delete a LocalAuthority"""
+  removeLocalAuthority(id: ID!): ID!
+  """Add a new PollingStation"""
+  addPollingStation(input: AddPollingStationInput!): PollingStation!
+  """Update an existing PollingStation"""
+  updatePollingStation(id: ID!, input: UpdatePollingStationInput!): PollingStation!
+  """Delete a PollingStation"""
+  removePollingStation(id: ID!): ID!
+  """Add a new Province"""
+  addProvince(input: AddProvinceInput!): Province!
+  """Update an existing Province"""
+  updateProvince(id: ID!, input: UpdateProvinceInput!): Province!
+  """Delete a Province"""
+  removeProvince(id: ID!): ID!
+  """Add a new Role"""
+  addRole(input: AddRoleInput!): Role!
+  """Update an existing Role"""
+  updateRole(id: ID!, input: UpdateRoleInput!): Role!
+  """Delete a Role"""
+  removeRole(id: ID!): ID!
+  """Give a Role a permission"""
+  assignPermission(id: ID!, permissionId: ID!): Boolean!
+  """Remove a permission from a role"""
+  unassignPermission(id: ID!, permissionId: ID!): Boolean!
+  """Add a new UserHistory Event"""
+  addUserHistory(input: AddUserHistoryInput!): UserHistory!
+  """Update an existing UserHistory Event"""
+  updateUserHistory(id: ID!, input: UpdateUserHistoryInput!): UserHistory!
+  """Delete a UserHistory"""
+  removeUserHistory(id: ID!): ID!
+  """Add a new UserRole"""
+  addUserRole(input: AddUserRoleInput!): UserRole!
+  """Delete a UserRole"""
+  removeUserRole(id: ID!): ID!
+  """Update an existing UserRole - FAKE code gen method DO NOT USE """
+  updateUserRole(id: ID!, input: UpdateUserRoleInput!): UserRole!
+  """Add a new Voter"""
+  addVoter(input: AddVoterInput!): Voter!
+  """Update an existing Voter"""
+  updateVoter(id: ID!, input: UpdateVoterInput!): Voter!
+  """Delete a Voter"""
+  removeVoter(id: ID!): ID!
+  """Add a new VoterRole"""
+  addVoterRole(input: AddVoterRoleInput!): VoterRole!
+  """Update an existing VoterRole"""
+  updateVoterRole(id: ID!, input: UpdateVoterRoleInput!): VoterRole!
+  """Delete a VoterRole"""
+  removeVoterRole(id: ID!): ID!
+  """Add a new Ward"""
+  addWard(input: AddWardInput!): Ward!
+  """Update an existing Ward"""
+  updateWard(id: ID!, input: UpdateWardInput!): Ward!
+  """Delete a Ward"""
+  removeWard(id: ID!): ID!
+  clearCacheKeys(cacheKeys: [CacheKeyInput!]!): Boolean!
+  clearAllCacheKeys: Boolean!
+}
