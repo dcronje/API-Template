@@ -1,5 +1,5 @@
 import { GraphQLScalarType } from 'graphql'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 
 export const UploadScalar = new GraphQLScalarType({
   name: 'Upload',
@@ -15,7 +15,7 @@ export const UploadScalar = new GraphQLScalarType({
   }
 })
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   typeResolvers: {
     Upload: UploadScalar,

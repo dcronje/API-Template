@@ -1,6 +1,6 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import FileCategorySchema from '@GQLtypes/FileCategory/FileCategorySchema'
 
-const registry: APIRegistry = APIRegistry.shared()
+const registry: GQLRegistry = GQLRegistry.shared()
 const fileCategorySchema = new FileCategorySchema()
 fileCategorySchema.register(registry)

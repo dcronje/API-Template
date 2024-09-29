@@ -1,5 +1,5 @@
 import * as changeCase from 'change-case'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { PermissionRegistry } from '@lib/PermissionRegistry'
 import { SelectQueryBuilder } from 'typeorm'
 import FileCategoryResolversGenerated from '@generated/FileCategory/FileCategoryResolversGenerated'
@@ -8,7 +8,7 @@ import { FileCategory } from '@models/index'
 
 class FileCategoryResolvers extends FileCategoryResolversGenerated {
 
-  register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {
+  register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {
     const queryResolvers = {
       allFileCategories: this.allFileCategories,
       oneFileCategory: this.oneFileCategory,

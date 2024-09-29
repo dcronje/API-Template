@@ -13,7 +13,7 @@ import { WebSocketServer } from 'ws'
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
 import { Context } from 'graphql-ws/lib/server'
 import { context } from '../context'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import CachePlugin, { CacheHitObject, CacheQueryObject } from '@lib/CachePlugin'
 import { AppDataSource } from '@root/data-source'
 import { CacheHit, CacheQuery } from '@models/index'
@@ -22,7 +22,7 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 let app: Express, server: Server, apolloServer: ApolloServer<GQLContext>, wsServer: WebSocketServer
 
 export const getApp = async (): Promise<{ app: Express, server: Server, apolloServer: ApolloServer<GQLContext> }> => {
-  const registry: APIRegistry = APIRegistry.shared()
+  const registry: GQLRegistry = GQLRegistry.shared()
 
   const schema = await registry.getFederatableSchema()
 

@@ -1,9 +1,9 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import gql from 'graphql-tag'
 import { ObjectTypeDefinitionNode, printSchema, UnionTypeDefinitionNode } from 'graphql'
 
 const getInterfaceTypes = async () => {
-  const apiRegistry = APIRegistry.shared()
+  const apiRegistry = GQLRegistry.shared()
   const executableSchema = await apiRegistry.getFederatableSchema()
   const schema = gql`${printSchema(executableSchema)}`
   const interfaces: { [k: string]: string[] } = {}
@@ -43,7 +43,7 @@ const getInterfaceTypes = async () => {
   return types
 }
 
-const apiRegistry = APIRegistry.shared()
+const apiRegistry = GQLRegistry.shared()
 apiRegistry.registerType({
   queryResolvers: {
     getInterfaceTypes,

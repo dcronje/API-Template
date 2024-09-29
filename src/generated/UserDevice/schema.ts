@@ -1,6 +1,6 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import UserDeviceSchema from '@GQLtypes/UserDevice/UserDeviceSchema'
 
-const registry: APIRegistry = APIRegistry.shared()
+const registry: GQLRegistry = GQLRegistry.shared()
 const userDeviceSchema = new UserDeviceSchema()
 userDeviceSchema.register(registry)

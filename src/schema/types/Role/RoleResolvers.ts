@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { PermissionRegistry } from '@lib/PermissionRegistry'
 import { SelectQueryBuilder } from 'typeorm'
 import RoleResolversGenerated from '@generated/Role/RoleResolversGenerated'
@@ -11,7 +11,7 @@ import { Role } from '@models/index'
 
 class RoleResolvers extends RoleResolversGenerated {
 
-  register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {
+  register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {
     const queryResolvers = {
       allRoles: this.allRoles,
       oneRole: this.oneRole,

@@ -1,5 +1,5 @@
 import { GraphQLScalarType } from 'graphql'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 
 const IDScalar = new GraphQLScalarType({
   name: 'ID',
@@ -20,7 +20,7 @@ const IDScalar = new GraphQLScalarType({
   },
 })
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   typeResolvers: {
     ID: IDScalar,

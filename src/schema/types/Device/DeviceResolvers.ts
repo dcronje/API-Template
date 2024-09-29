@@ -1,4 +1,4 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { PermissionRegistry } from '@lib/PermissionRegistry'
 import DeviceResolversGenerated from '@generated/Device/DeviceResolversGenerated'
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity'
@@ -15,7 +15,7 @@ class DeviceResolvers extends DeviceResolversGenerated {
     this.validateDevice = this.validateDevice.bind(this)
   }
 
-  register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {
+  register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {
     const mutationResolvers = {
       registerDevice: this.registerDevice,
       validateDevice: this.validateDevice,

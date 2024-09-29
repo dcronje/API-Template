@@ -1,4 +1,4 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import gql from 'graphql-tag'
 
 const orderDirectionEnum = gql`
@@ -10,7 +10,7 @@ const orderDirectionEnum = gql`
   }
 `
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   typeDefinitions: orderDirectionEnum,
 })

@@ -1,6 +1,6 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import ImageSchema from '@GQLtypes/Image/ImageSchema'
 
-const registry: APIRegistry = APIRegistry.shared()
+const registry: GQLRegistry = GQLRegistry.shared()
 const imageSchema = new ImageSchema()
 imageSchema.register(registry)

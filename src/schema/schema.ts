@@ -1,4 +1,4 @@
-import importFromPath from '@simple/import-from-path'
+import importFromPath from 'import-from-path'
 import path from 'path'
 
 export async function buildSchema(): Promise<void> {

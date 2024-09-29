@@ -1,5 +1,5 @@
 import { GraphQLScalarType } from 'graphql'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 
 const PasswordScalar = new GraphQLScalarType({
   name: 'Password',
@@ -20,7 +20,7 @@ const PasswordScalar = new GraphQLScalarType({
   },
 })
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   typeResolvers: {
     Password: PasswordScalar,

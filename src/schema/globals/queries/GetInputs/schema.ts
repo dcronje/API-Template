@@ -1,4 +1,4 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import gql from 'graphql-tag'
 
 const queryDefinitions = gql`
@@ -8,7 +8,7 @@ const queryDefinitions = gql`
   }
 `
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   queryDefinitions,
 })

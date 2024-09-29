@@ -1,5 +1,5 @@
 import { mapSchema, MapperKind } from '@graphql-tools/utils'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { GraphQLFieldConfig, GraphQLSchema, defaultFieldResolver, ListValueNode, ArgumentNode, StringValueNode, DirectiveNode, GraphQLArgumentConfig, TypeNode, GraphQLError } from 'graphql'
 
 const getNamedType = (type: TypeNode): string => {
@@ -144,7 +144,7 @@ function permissionDirectiveTransformer(schema: GraphQLSchema) {
   })
 }
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerDirectives({
   directiveResolvers: {
     Permissions: permissionDirectiveTransformer,

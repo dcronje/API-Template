@@ -1,4 +1,4 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import gql from 'graphql-tag'
 
 const directiveDefinition = gql`
@@ -6,7 +6,7 @@ const directiveDefinition = gql`
   directive @isAuthenticated on OBJECT | FIELD_DEFINITION
 `
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerDirectives({
   directiveDefinition,
 })

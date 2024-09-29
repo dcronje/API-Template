@@ -1,5 +1,5 @@
 import { EnumDescription } from '@root/types/generated'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { GraphQLResolveInfo, GraphQLInputObjectType, isInputObjectType, getNullableType, isRequiredInputField, isListType, getNamedType, isEnumType } from 'graphql'
 
 const parseDetailedInputObject = (inputObject?: GraphQLInputObjectType): any => {
@@ -51,7 +51,7 @@ const queryResolvers = {
   },
 }
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   queryResolvers,
 })

@@ -1,7 +1,7 @@
 import cluster from 'cluster'
 import { Clusterer } from '@lib/Cluster'
 import http from 'http'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { performPostStartupChecks, performPreStartupChecks } from './startup'
 import build from '@schema/index'
 import { getApp } from '@apps/main.app'
@@ -18,7 +18,7 @@ clusterer.preMaster(async () => {
 })
 
 clusterer.postMaster(async () => {
-  const apiRegistry = APIRegistry.shared()
+  const apiRegistry = GQLRegistry.shared()
   await build()
   await performPostStartupChecks(apiRegistry)
   await AppDataSource.destroy()

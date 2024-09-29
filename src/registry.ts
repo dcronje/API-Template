@@ -1,9 +1,9 @@
-import { APIRegistry } from '@simple/api-registry'
-import { InheritsPlugin } from '@simple/inherit-plugin'
+import { GQLRegistry } from 'gql-registry'
 import { RedisHelper } from '@lib/RedisHelper'
+import { GQLInheritsPlugin } from 'gql-inherit-plugin'
 
 export const configure = async (): Promise<void> => {
-  const registry = APIRegistry.shared()
+  const registry = GQLRegistry.shared()
   const interfaceDirectives = [
     'Simple',
     'Name',
@@ -19,7 +19,7 @@ export const configure = async (): Promise<void> => {
     'Derived',
   ]
 
-  const inherits = new InheritsPlugin({ interfaceDirectives, fieldDirectives })
+  const inherits = new GQLInheritsPlugin({ interfaceDirectives, fieldDirectives })
   registry.registerPlugin(inherits)
 
 }

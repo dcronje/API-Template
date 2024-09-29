@@ -1,9 +1,9 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import gql from 'graphql-tag'
 
 class ImageSchema {
 
-  register(registry: APIRegistry): void {
+  register(registry: GQLRegistry): void {
     registry.registerType({
       typeDefinitions: this.typeDefinitions,
       queryDefinitions: this.queryDefinitions,

@@ -1,4 +1,4 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import gql from 'graphql-tag'
 
 const unitTypeEnum = gql`
@@ -30,7 +30,7 @@ const unitTypeEnum = gql`
   }
 `
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   typeDefinitions: unitTypeEnum,
 })

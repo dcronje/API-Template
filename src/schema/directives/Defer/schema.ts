@@ -1,11 +1,11 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import gql from 'graphql-tag'
 
 const directiveDefinition = gql`
   directive @defer(if: Boolean, label: String) on FRAGMENT_SPREAD | INLINE_FRAGMENT
 `
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerDirectives({
   directiveDefinition,
 })

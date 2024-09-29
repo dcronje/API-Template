@@ -1,5 +1,5 @@
 import { GraphQLScalarType } from 'graphql'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 
 const EmailScalar = new GraphQLScalarType({
   name: 'Email',
@@ -21,7 +21,7 @@ const EmailScalar = new GraphQLScalarType({
 })
 
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   typeResolvers: {
     Email: EmailScalar,

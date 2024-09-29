@@ -2,7 +2,7 @@ import moment from 'moment'
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
 import { GraphQLError } from 'graphql/error'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 
 let TimeScalar = new GraphQLScalarType({
   name: 'Time',
@@ -33,7 +33,7 @@ let TimeScalar = new GraphQLScalarType({
   },
 })
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   typeResolvers: {
     Time: TimeScalar,

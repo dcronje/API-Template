@@ -1,4 +1,4 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import gql from 'graphql-tag'
 
 const typeDefinitions = gql`
@@ -15,7 +15,7 @@ const mutationDefinitions = gql`
   }
 `
 
-const apiRegistry = APIRegistry.shared()
+const apiRegistry = GQLRegistry.shared()
 apiRegistry.registerType({
   typeDefinitions,
   mutationDefinitions,

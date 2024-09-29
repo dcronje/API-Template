@@ -80,12 +80,12 @@ class ModelBuilder extends Builder {
 
     if (!schemaItem.hasStorage) {
       code.addBlock(`
-        import { APIRegistry } from '@simple/api-registry'
+        import { GQLRegistry } from 'gql-registry'
         import gql from 'graphql-tag'
 
         class ${UCFSingular}Schema {
 
-          register(registry: APIRegistry): void {
+          register(registry: GQLRegistry): void {
             registry.registerType({
               typeDefinitions: this.typeDefinitions,
             })
@@ -114,7 +114,7 @@ class ModelBuilder extends Builder {
         export default ${UCFSingular}Schema
       `)
     } else {
-      code.addLine('import { APIRegistry } from \'@simple/api-registry\'')
+      code.addLine('import { GQLRegistry } from \'gql-registry\'')
       code.addLine('import gql from \'graphql-tag\'')
       code.addLine('')
       code.addLine(`class ${UCFSingular}Schema {`)
@@ -122,7 +122,7 @@ class ModelBuilder extends Builder {
 
       if (schemaItem.requiresQueries && schemaItem.requiresMutations) {
         code.addBlock(`
-          register(registry: APIRegistry): void {
+          register(registry: GQLRegistry): void {
             registry.registerType({
               typeDefinitions: this.typeDefinitions,
               queryDefinitions: this.queryDefinitions,
@@ -230,7 +230,7 @@ class ModelBuilder extends Builder {
         `)
       } else if (schemaItem.requiresQueries) {
         code.addBlock(`
-          register(registry: APIRegistry): void {
+          register(registry: GQLRegistry): void {
             registry.registerType({
               typeDefinitions: this.typeDefinitions,
               queryDefinitions: this.queryDefinitions,
@@ -311,7 +311,7 @@ class ModelBuilder extends Builder {
         `)
       } else if (schemaItem.requiresMutations) {
         code.addBlock(`
-          register(registry: APIRegistry): void {
+          register(registry: GQLRegistry): void {
             registry.registerType({
               typeDefinitions: this.typeDefinitions,
               mutationDefinitions: this.mutationDefinitions,
@@ -361,7 +361,7 @@ class ModelBuilder extends Builder {
         `)
       } else {
         code.addBlock(`
-          register(registry: APIRegistry): void {
+          register(registry: GQLRegistry): void {
             registry.registerType({
               typeDefinitions: this.typeDefinitions,
             })
@@ -403,7 +403,7 @@ class ModelBuilder extends Builder {
     }
 
     code.addBlock(`
-      import { APIRegistry } from '@simple/api-registry'
+      import { GQLRegistry } from 'gql-registry'
       import { PermissionRegistry } from '@lib/PermissionRegistry'
       import { SelectQueryBuilder } from 'typeorm'
       import { ${UCFSingular} } from '@models/index'
@@ -417,7 +417,7 @@ class ModelBuilder extends Builder {
 
     if (schemaItem.requiresQueries && schemaItem.requiresMutations) {
       code.addBlock(`
-        register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {
+        register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {
           const queryResolvers = {
             all${UCFPlural}: this.all${UCFPlural},
             one${UCFSingular}: this.one${UCFSingular},
@@ -492,7 +492,7 @@ class ModelBuilder extends Builder {
       `)
     } else if (schemaItem.requiresQueries) {
       code.addBlock(`
-        register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {
+        register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {
           const queryResolvers = {
             all${UCFPlural}: this.all${UCFPlural},
             one${UCFSingular}: this.one${UCFSingular},
@@ -561,7 +561,7 @@ class ModelBuilder extends Builder {
       `)
     } else if (schemaItem.requiresMutations) {
       code.addBlock(`
-        register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {
+        register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {
           const mutationResolvers = {
             add${UCFSingular}: this.add${UCFSingular},
             update${UCFSingular}: this.update${UCFSingular},
@@ -573,7 +573,7 @@ class ModelBuilder extends Builder {
         }
       `)
     } else {
-      code.addLine('register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {}')
+      code.addLine('register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {}')
     }
 
     code.addLine('')
@@ -934,11 +934,11 @@ class ModelBuilder extends Builder {
     }
 
     code.addBlock(`
-      import { APIRegistry } from '@simple/api-registry'
+      import { GQLRegistry } from 'gql-registry'
       import { PermissionRegistry } from '@lib/PermissionRegistry'
       import ${UCFSingular}Resolvers from '@GQLtypes/${UCFSingular}/${UCFSingular}Resolvers'
       
-      const registry: APIRegistry = APIRegistry.shared()
+      const registry: GQLRegistry = GQLRegistry.shared()
       const permissionRegistry: PermissionRegistry = PermissionRegistry.shared()
       const ${LCFSingular}Resolvers = new ${UCFSingular}Resolvers()
       ${LCFSingular}Resolvers.register(registry, permissionRegistry)
@@ -953,10 +953,10 @@ class ModelBuilder extends Builder {
     const code = new CodeGen()
 
     code.addBlock(`
-      import { APIRegistry } from '@simple/api-registry'
+      import { GQLRegistry } from 'gql-registry'
       import ${UCFSingular}Schema from '@GQLtypes/${UCFSingular}/${UCFSingular}Schema'
 
-      const registry: APIRegistry = APIRegistry.shared()
+      const registry: GQLRegistry = GQLRegistry.shared()
       const ${LCFSingular}Schema = new ${UCFSingular}Schema()
       ${LCFSingular}Schema.register(registry)
     `)

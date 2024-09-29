@@ -1,5 +1,5 @@
 import { User } from '@root/types/generated'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 
 const queryResolvers = {
   currentUser: (_: unknown, __: unknown, ctx: GQLContext): User | null => {
@@ -7,7 +7,7 @@ const queryResolvers = {
   },
 }
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   queryResolvers,
 })

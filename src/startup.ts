@@ -1,8 +1,8 @@
 import { PermissionRegistry } from '@lib/PermissionRegistry'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { AppDataSource } from './data-source'
 
-const checkPermissions = async (registry: APIRegistry): Promise<void> => {
+const checkPermissions = async (registry: GQLRegistry): Promise<void> => {
   const permissionRegistry = new PermissionRegistry()
   await permissionRegistry.startup(registry)
 }
@@ -20,7 +20,7 @@ export const performPreStartupChecks = async (): Promise<void> => {
   await createDatabaseConnection()
 }
 
-export const performPostStartupChecks = async (registry: APIRegistry): Promise<void> => {
+export const performPostStartupChecks = async (registry: GQLRegistry): Promise<void> => {
   await checkPermissions(registry)
 }
 

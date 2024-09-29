@@ -1,6 +1,6 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import PermissionSchema from '@GQLtypes/Permission/PermissionSchema'
 
-const registry: APIRegistry = APIRegistry.shared()
+const registry: GQLRegistry = GQLRegistry.shared()
 const permissionSchema = new PermissionSchema()
 permissionSchema.register(registry)

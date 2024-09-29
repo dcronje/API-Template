@@ -1,4 +1,4 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { PermissionRegistry } from '@lib/PermissionRegistry'
 import { SelectQueryBuilder } from 'typeorm'
 import UserRoleResolversGenerated from '@generated/UserRole/UserRoleResolversGenerated'
@@ -9,7 +9,7 @@ import { UserRole } from '@models/index'
 
 class UserRoleResolvers extends UserRoleResolversGenerated {
 
-  register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {
+  register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {
     const queryResolvers = {
       allUserRoles: this.allUserRoles,
       oneUserRole: this.oneUserRole,

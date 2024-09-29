@@ -1,4 +1,4 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import gql from 'graphql-tag'
 
 
@@ -6,7 +6,7 @@ const directiveDefinition = gql`
   directive @recomposeCache on QUERY
 `
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerDirectives({
   directiveDefinition,
 })

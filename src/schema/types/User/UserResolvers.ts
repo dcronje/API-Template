@@ -1,5 +1,5 @@
 import UserResolversGenerated from '@generated/User/UserResolversGenerated'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { PermissionRegistry } from '@lib/PermissionRegistry'
 import * as changeCase from 'change-case'
 import { Brackets, SelectQueryBuilder } from 'typeorm'
@@ -9,7 +9,7 @@ import { User } from '@models/index'
 
 class UserResolvers extends UserResolversGenerated {
 
-  register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {
+  register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {
     const queryResolvers = {
       allUsers: this.allUsers,
       oneUser: this.oneUser,

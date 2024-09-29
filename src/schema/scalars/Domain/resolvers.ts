@@ -1,5 +1,5 @@
 import { GraphQLScalarType } from 'graphql'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 
 const DomainScalar = new GraphQLScalarType({
   name: 'Domain',
@@ -20,7 +20,7 @@ const DomainScalar = new GraphQLScalarType({
   },
 })
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   typeResolvers: {
     Domain: DomainScalar,

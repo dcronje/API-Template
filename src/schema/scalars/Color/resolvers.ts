@@ -1,5 +1,5 @@
 import { GraphQLScalarType } from 'graphql'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 
 const ColorScalar = new GraphQLScalarType({
   name: 'Color',
@@ -20,7 +20,7 @@ const ColorScalar = new GraphQLScalarType({
   },
 })
 
-let registry = APIRegistry.shared()
+let registry = GQLRegistry.shared()
 registry.registerType({
   typeResolvers: {
     Color: ColorScalar,

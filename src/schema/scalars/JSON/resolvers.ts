@@ -1,5 +1,5 @@
 import { GraphQLScalarType } from 'graphql'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 
 import GraphQLJSON, { GraphQLJSONObject } from 'graphql-type-json'
 
@@ -22,7 +22,7 @@ const JSONScalar = new GraphQLScalarType({
   },
 })
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   typeResolvers: {
     JSON: GraphQLJSON,

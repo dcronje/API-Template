@@ -64,12 +64,12 @@ class InterfaceBuilder extends Builder {
 
     if (schemaItem.hasStorage) {
       code.addBlock(`
-        import { APIRegistry } from '@simple/api-registry'
+        import { GQLRegistry } from 'gql-registry'
         import gql from 'graphql-tag'
         
         class ${UCFSingular}Schema {
         
-          register(registry: APIRegistry): void {
+          register(registry: GQLRegistry): void {
             registry.registerType({
               typeDefinitions: this.typeDefinitions,
               queryDefinitions: this.queryDefinitions,
@@ -157,12 +157,12 @@ class InterfaceBuilder extends Builder {
     }
 
     code.addBlock(`
-      import { APIRegistry } from '@simple/api-registry'
+      import { GQLRegistry } from 'gql-registry'
       import gql from 'graphql-tag'
       
       class ${UCFSingular}Schema {
       
-        register(registry: APIRegistry): void {
+        register(registry: GQLRegistry): void {
           registry.registerType({
             typeDefinitions: this.typeDefinitions,
           })
@@ -196,7 +196,7 @@ class InterfaceBuilder extends Builder {
 
     if (schemaItem.hasStorage) {
       code.addBlock(`
-        import { APIRegistry } from '@simple/api-registry'
+        import { GQLRegistry } from 'gql-registry'
         import { PermissionRegistry } from '@lib/PermissionRegistry'
         import { SelectQueryBuilder } from 'typeorm'
         import { ${UCFSingular} } from '@models/index'
@@ -207,7 +207,7 @@ class InterfaceBuilder extends Builder {
 
         class ${UCFSingular}Resolvers extends ${UCFSingular}ResolversGenerated {
         
-          register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {
+          register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {
             const queryResolvers = {
               all${UCFPlural}: this.all${UCFPlural},
               one${UCFSingular}: this.one${UCFSingular},
@@ -258,7 +258,7 @@ class InterfaceBuilder extends Builder {
     }
 
     code.addBlock(`
-      import { APIRegistry } from '@simple/api-registry'
+      import { GQLRegistry } from 'gql-registry'
       import { PermissionRegistry } from '@lib/PermissionRegistry'
       import { SelectQueryBuilder } from 'typeorm'
       import changeCase from 'change-case'
@@ -267,7 +267,7 @@ class InterfaceBuilder extends Builder {
 
       class ${UCFSingular}Resolvers extends ${UCFSingular}ResolversGenerated {
       
-        register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {
+        register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {
           registry.registerType({
             interfaceResolvers: this.interfaceResolvers,
           })
@@ -406,11 +406,11 @@ class InterfaceBuilder extends Builder {
     const code = new CodeGen()
 
     code.addBlock(`
-      import { APIRegistry } from '@simple/api-registry'
+      import { GQLRegistry } from 'gql-registry'
       import { PermissionRegistry } from '@lib/PermissionRegistry'
       import ${UCFSingular}Resolvers from '@GQLtypes/${UCFSingular}/${UCFSingular}Resolvers'
       
-      const registry: APIRegistry = APIRegistry.shared()
+      const registry: GQLRegistry = GQLRegistry.shared()
       const permissionRegistry: PermissionRegistry = PermissionRegistry.shared()
       const ${LCFSingular}Resolvers = new ${UCFSingular}Resolvers()
       ${LCFSingular}Resolvers.register(registry, permissionRegistry)
@@ -425,10 +425,10 @@ class InterfaceBuilder extends Builder {
     const code = new CodeGen()
 
     code.addBlock(`
-      import { APIRegistry } from '@simple/api-registry'
+      import { GQLRegistry } from 'gql-registry'
       import ${UCFSingular}Schema from '@GQLtypes/${UCFSingular}/${UCFSingular}Schema'
 
-      const registry: APIRegistry = APIRegistry.shared()
+      const registry: GQLRegistry = GQLRegistry.shared()
       const ${LCFSingular}Schema = new ${UCFSingular}Schema()
       ${LCFSingular}Schema.register(registry)
     `)

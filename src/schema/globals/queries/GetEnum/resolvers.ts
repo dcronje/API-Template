@@ -1,5 +1,5 @@
 import { QueryGetEnumsArgs, EnumDescription, EnumValue, QueryGetEnumArgs } from '@root/types/generated'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { GraphQLResolveInfo, GraphQLEnumType, GraphQLEnumValue } from 'graphql'
 
 const queryResolvers = {
@@ -46,7 +46,7 @@ const queryResolvers = {
   },
 }
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   queryResolvers,
 })

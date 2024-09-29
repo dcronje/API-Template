@@ -1,7 +1,7 @@
 import * as changeCase from 'change-case'
 import { GraphQLError } from 'graphql'
 import AWSHelper from '@lib/AWSHelper'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { PermissionRegistry } from '@lib/PermissionRegistry'
 import { SelectQueryBuilder } from 'typeorm'
 import ImageResolversGenerated from '@generated/Image/ImageResolversGenerated'
@@ -18,7 +18,7 @@ class ImageResolvers extends ImageResolversGenerated {
     this.staticImage = this.staticImage.bind(this)
   }
 
-  register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {
+  register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {
     const queryResolvers = {
       allImages: this.allImages,
       oneImage: this.oneImage,

@@ -2,7 +2,7 @@ import moment from 'moment'
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
 import { GraphQLError } from 'graphql/error'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 
 let DateTimeScalar = new GraphQLScalarType({
   name: 'DateTime',
@@ -36,7 +36,7 @@ let DateTimeScalar = new GraphQLScalarType({
   },
 })
 
-const registry = APIRegistry.shared()
+const registry = GQLRegistry.shared()
 registry.registerType({
   typeResolvers: {
     DateTime: DateTimeScalar,

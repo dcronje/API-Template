@@ -1,5 +1,5 @@
 import * as changeCase from 'change-case'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { PermissionRegistry } from '@lib/PermissionRegistry'
 import { SelectQueryBuilder } from 'typeorm'
 import PermissionResolversGenerated from '@generated/Permission/PermissionResolversGenerated'
@@ -8,7 +8,7 @@ import { Permission } from '@models/index'
 
 class PermissionResolvers extends PermissionResolversGenerated {
 
-  register(registry: APIRegistry, permissionRegistry: PermissionRegistry): void {
+  register(registry: GQLRegistry, permissionRegistry: PermissionRegistry): void {
     const queryResolvers = {
       allPermissions: this.allPermissions,
       onePermission: this.onePermission,

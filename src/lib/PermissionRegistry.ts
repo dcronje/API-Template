@@ -1,4 +1,4 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import * as changeCase from 'change-case'
 import { DocumentNode, ObjectTypeDefinitionNode } from 'graphql'
 import chalk from 'chalk'
@@ -36,13 +36,13 @@ export class PermissionRegistry {
     return this.instance
   }
 
-  async startup(apiRegistry: APIRegistry): Promise<void> {
+  async startup(apiRegistry: GQLRegistry): Promise<void> {
     await this.syncPermissions()
     await this.validatePermissions(apiRegistry)
     await this.createDefaultUserRole()
   }
 
-  async validatePermissions(apiRegistry: APIRegistry): Promise<void> {
+  async validatePermissions(apiRegistry: GQLRegistry): Promise<void> {
     const schema = await apiRegistry.getDefinitionsDocument() as DocumentNode
     const permissions: string[] = []
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -3,7 +3,7 @@ import { buildSchema } from '../src/schema/schema'
 import { FileSchema } from './type.d'
 import path from 'path'
 import fs from 'fs'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { buildClientSchema, introspectionFromSchema, parse, print, printSchema } from 'graphql'
 import Builder from './Builder'
 
@@ -55,7 +55,7 @@ class GenerateTypes extends Builder {
   }
 
   async begin(): Promise<FileSchema[]> {
-    const registry: APIRegistry = APIRegistry.shared()
+    const registry: GQLRegistry = GQLRegistry.shared()
     await buildSchema()
     const executableSchema = await registry.getFederatableSchema()
     const introspection = introspectionFromSchema(executableSchema)

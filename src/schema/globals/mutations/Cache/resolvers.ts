@@ -1,5 +1,5 @@
 import { clearCacheKeys } from "@lib/CachePlugin"
-import { APIRegistry } from "@simple/api-registry"
+import { GQLRegistry } from "gql-registry"
 
 
 const mutationResolvers = {
@@ -14,7 +14,7 @@ const mutationResolvers = {
 }
 
 
-const apiRegistry = APIRegistry.shared()
+const apiRegistry = GQLRegistry.shared()
 apiRegistry.registerType({
   mutationResolvers,
 })

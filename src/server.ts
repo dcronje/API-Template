@@ -3,14 +3,14 @@ import './env'
 import 'reflect-metadata'
 import './crons'
 import build from './schema/'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { performPreStartupChecks, performPostStartupChecks } from './startup'
 import { getApp } from '@apps/main.app'
 import chalk from 'chalk'
 import notifier from 'node-notifier'
 
 const start = async () => {
-  const registry: APIRegistry = APIRegistry.shared()
+  const registry: GQLRegistry = GQLRegistry.shared()
   await performPreStartupChecks()
   await build()
   const { server } = await getApp()

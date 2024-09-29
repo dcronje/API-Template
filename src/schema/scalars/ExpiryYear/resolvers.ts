@@ -1,5 +1,5 @@
 import { GraphQLScalarType } from 'graphql'
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import moment = require('moment');
 
 const ExpiryYearScalar = new GraphQLScalarType({
@@ -40,7 +40,7 @@ class YearConversionError extends TypeError {
   }
 }
 
-let registry = APIRegistry.shared()
+let registry = GQLRegistry.shared()
 registry.registerType({
   typeResolvers: {
     ExpiryYear: ExpiryYearScalar,

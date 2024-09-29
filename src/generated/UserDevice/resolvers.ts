@@ -1,8 +1,8 @@
-import { APIRegistry } from '@simple/api-registry'
+import { GQLRegistry } from 'gql-registry'
 import { PermissionRegistry } from '@lib/PermissionRegistry'
 import UserDeviceResolvers from '@GQLtypes/UserDevice/UserDeviceResolvers'
 
-const registry: APIRegistry = APIRegistry.shared()
+const registry: GQLRegistry = GQLRegistry.shared()
 const permissionRegistry: PermissionRegistry = PermissionRegistry.shared()
 const userDeviceResolvers = new UserDeviceResolvers()
 userDeviceResolvers.register(registry, permissionRegistry)
