@@ -107,12 +107,12 @@ type SendInvitationContext = SendInvitationArgs
 
 export class UserSaga extends SagaController {
 
-  async delete(args: DeleteArgs): Promise<User> {
+  async delete(args: DeleteArgs, locks?: string[]): Promise<User> {
 
     const context = {
       ...args,
     }
-    return new Saga<DeleteContext, User>(context, this.locked)
+    return new Saga<DeleteContext, User>(context, locks)
       .commit(async (context) => {
         const { user } = context
         const updateUserData = {} as QueryDeepPartialEntity<User>
@@ -137,11 +137,11 @@ export class UserSaga extends SagaController {
       .execute()
   }
 
-  async add(args: AddArgs): Promise<User> {
+  async add(args: AddArgs, locks?: string[]): Promise<User> {
     const context = {
       ...args,
     }
-    return new Saga<AddContext, User>(context, this.locked)
+    return new Saga<AddContext, User>(context, locks)
       .validate(async (context) => {
         const { email } = context
         const unique = User.hasUniqueCredentials({ email })
@@ -197,11 +197,11 @@ export class UserSaga extends SagaController {
       .execute()
   }
 
-  async update(args: UpdateArgs): Promise<User> {
+  async update(args: UpdateArgs, locks?: string[]): Promise<User> {
     const context = {
       ...args,
     }
-    return new Saga<UpdateContext, User>(context, this.locked)
+    return new Saga<UpdateContext, User>(context, locks)
       .commit(async (context) => {
         const { user, title, firstName, lastName, email } = context
         const updateData = {} as QueryDeepPartialEntity<User>
@@ -233,11 +233,11 @@ export class UserSaga extends SagaController {
       .execute()
   }
 
-  async validateInvite(args: ValidateInviteArgs): Promise<User> {
+  async validateInvite(args: ValidateInviteArgs, locks?: string[]): Promise<User> {
     const context = {
       ...args,
     }
-    return new Saga<ValidateInviteContext, User>(context, this.locked)
+    return new Saga<ValidateInviteContext, User>(context, locks)
       .validate(async (context) => {
         const { token } = context
         const jwt = new JWTAuth()
@@ -268,11 +268,11 @@ export class UserSaga extends SagaController {
       .execute()
   }
 
-  async login(args: LogInArgs): Promise<User> {
+  async login(args: LogInArgs, locks?: string[]): Promise<User> {
     const context = {
       ...args,
     }
-    return new Saga<LogInContext, User>(context, this.locked)
+    return new Saga<LogInContext, User>(context, locks)
       .validate(async (context) => {
         const { ctx: { device } } = context
         if (!device) {
@@ -314,11 +314,11 @@ export class UserSaga extends SagaController {
       .execute()
   }
 
-  async logOut(args: LogOutArgs): Promise<void> {
+  async logOut(args: LogOutArgs, locks?: string[]): Promise<void> {
     const context = {
       ...args,
     }
-    return new Saga<LogOutContext, void>(context, this.locked)
+    return new Saga<LogOutContext, void>(context, locks)
       .validate(async (context) => {
         const { ctx: { device } } = context
         if (!device) {
@@ -361,11 +361,11 @@ export class UserSaga extends SagaController {
       .execute()
   }
 
-  async signUp(args: SignUpArgs): Promise<User> {
+  async signUp(args: SignUpArgs, locks?: string[]): Promise<User> {
     const context = {
       ...args,
     }
-    return new Saga<SignUpContext, User>(context, this.locked)
+    return new Saga<SignUpContext, User>(context, locks)
       .validate(async (context) => {
         const { ctx: { device } } = context
         if (!device) {
@@ -412,11 +412,11 @@ export class UserSaga extends SagaController {
       .execute()
   }
 
-  async requestPasswordReset(args: RequestPasswordResetArgs): Promise<boolean> {
+  async requestPasswordReset(args: RequestPasswordResetArgs, locks?: string[]): Promise<boolean> {
     const context = {
       ...args,
     }
-    return new Saga<RequestPasswordResetContext, boolean>(context, this.locked)
+    return new Saga<RequestPasswordResetContext, boolean>(context, locks)
       .validate(async (context) => {
         const { email } = context
         const user = await AppDataSource.getRepository(User).createQueryBuilder()
@@ -471,11 +471,11 @@ export class UserSaga extends SagaController {
       .execute()
   }
 
-  async resetPassword(args: ResetPasswordArgs): Promise<boolean> {
+  async resetPassword(args: ResetPasswordArgs, locks?: string[]): Promise<boolean> {
     const context = {
       ...args,
     }
-    return new Saga<ResetPasswordContext, boolean>(context, this.locked)
+    return new Saga<ResetPasswordContext, boolean>(context, locks)
       .commit(async (context) => {
         const { token } = context
         const jwt = new JWTAuth()
@@ -512,11 +512,11 @@ export class UserSaga extends SagaController {
       .execute()
   }
 
-  async sendInvitation(args: SendInvitationArgs): Promise<boolean> {
+  async sendInvitation(args: SendInvitationArgs, locks?: string[]): Promise<boolean> {
     const context = {
       ...args,
     }
-    return new Saga<SendInvitationContext, boolean>(context, this.locked)
+    return new Saga<SendInvitationContext, boolean>(context, locks)
       .validate(async (context) => {
         const { user } = context
         if (user.hasAcceptedInvite) {

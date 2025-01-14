@@ -70,64 +70,6 @@ export enum ChronologicalUnitTypeEnum {
   
 }
 
-export enum CitizenOrderEnum {  
-  /** Constituency */
-  Constituency = 'CONSTITUENCY',
-  /** Created At */
-  CreatedAt = 'CREATED_AT',
-  /** District */
-  District = 'DISTRICT',
-  /** Local Authority */
-  LocalAuthority = 'LOCAL_AUTHORITY',
-  /** Name */
-  Name = 'NAME',
-  /** Polling Station */
-  PollingStation = 'POLLING_STATION',
-  /** Province */
-  Province = 'PROVINCE',
-  /** Updated At */
-  UpdatedAt = 'UPDATED_AT',
-  /** Ward */
-  Ward = 'WARD'
-  
-}
-
-export enum ConstituencyOrderEnum {  
-  /** Created At */
-  CreatedAt = 'CREATED_AT',
-  /** District */
-  District = 'DISTRICT',
-  /** Name */
-  Name = 'NAME',
-  /** Province */
-  Province = 'PROVINCE',
-  /** Updated At */
-  UpdatedAt = 'UPDATED_AT'
-  
-}
-
-export enum DistrictOrderEnum {  
-  /** Created At */
-  CreatedAt = 'CREATED_AT',
-  /** Name */
-  Name = 'NAME',
-  /** Province */
-  Province = 'PROVINCE',
-  /** Updated At */
-  UpdatedAt = 'UPDATED_AT'
-  
-}
-
-export enum ElectionOrderEnum {  
-  /** Created At */
-  CreatedAt = 'CREATED_AT',
-  /** Name */
-  Name = 'NAME',
-  /** Updated At */
-  UpdatedAt = 'UPDATED_AT'
-  
-}
-
 export enum FileCategoryOrderEnum {  
   /** Created At */
   CreatedAt = 'CREATED_AT',
@@ -145,14 +87,6 @@ export enum FileOrderEnum {
   Name = 'NAME',
   /** Updated At */
   UpdatedAt = 'UPDATED_AT'
-  
-}
-
-export enum GenderEnum {  
-  /** Female */
-  Female = 'FEMALE',
-  /** Male */
-  Male = 'MALE'
   
 }
 
@@ -208,16 +142,6 @@ export enum ImageTransformTypeEnum {
   
 }
 
-export enum LocalAuthorityOrderEnum {  
-  /** Created At */
-  CreatedAt = 'CREATED_AT',
-  /** Name */
-  Name = 'NAME',
-  /** Updated At */
-  UpdatedAt = 'UPDATED_AT'
-  
-}
-
 export enum MonthWeekEnum {  
   /** 1st */
   First = 'FIRST',
@@ -252,36 +176,6 @@ export enum PermissionTypeEnum {
   DynamicPermission = 'DYNAMIC_PERMISSION',
   /** Static Permission (Specified in Code) */
   StaticPermission = 'STATIC_PERMISSION'
-  
-}
-
-export enum PollingStationOrderEnum {  
-  /** Constituency */
-  Constituency = 'CONSTITUENCY',
-  /** Created At */
-  CreatedAt = 'CREATED_AT',
-  /** District */
-  District = 'DISTRICT',
-  /** Local Authority */
-  LocalAuthority = 'LOCAL_AUTHORITY',
-  /** Name */
-  Name = 'NAME',
-  /** Province */
-  Province = 'PROVINCE',
-  /** Updated At */
-  UpdatedAt = 'UPDATED_AT',
-  /** Ward */
-  Ward = 'WARD'
-  
-}
-
-export enum ProvinceOrderEnum {  
-  /** Created At */
-  CreatedAt = 'CREATED_AT',
-  /** Name */
-  Name = 'NAME',
-  /** Updated At */
-  UpdatedAt = 'UPDATED_AT'
   
 }
 
@@ -343,54 +237,6 @@ export enum UnitTypeEnum {
   
 }
 
-export enum UserDetailsEventEnum {  
-  /** Forgot Password */
-  ForgotPassword = 'FORGOT_PASSWORD',
-  /** General */
-  General = 'GENERAL',
-  /** Password */
-  Password = 'PASSWORD',
-  /** Verification */
-  Verification = 'VERIFICATION'
-  
-}
-
-export enum UserHistoryEventEnum {  
-  /** Forgot Password */
-  ForgotPassword = 'FORGOT_PASSWORD',
-  /** General */
-  General = 'GENERAL',
-  /** Password */
-  Password = 'PASSWORD',
-  /** Details Event */
-  UserDetailsEvent = 'USER_DETAILS_EVENT',
-  /** Sign Up Event */
-  UserSignUpEvent = 'USER_SIGN_UP_EVENT',
-  /** Verification */
-  Verification = 'VERIFICATION'
-  
-}
-
-export enum UserHistoryOrderEnum {  
-  /** Created At */
-  CreatedAt = 'CREATED_AT',
-  /** Event */
-  Event = 'EVENT',
-  /** Type */
-  Type = 'TYPE',
-  /** Updated At */
-  UpdatedAt = 'UPDATED_AT'
-  
-}
-
-export enum UserHistoryTypeEnum {  
-  /** Details Event */
-  UserDetailsEvent = 'USER_DETAILS_EVENT',
-  /** Sign Up Event */
-  UserSignUpEvent = 'USER_SIGN_UP_EVENT'
-  
-}
-
 export enum UserOrderEnum {  
   /** Created At */
   CreatedAt = 'CREATED_AT',
@@ -409,44 +255,6 @@ export enum UserOrderEnum {
 export enum UserRoleOrderEnum {  
   /** Created At */
   CreatedAt = 'CREATED_AT',
-  /** Name */
-  Name = 'NAME',
-  /** Updated At */
-  UpdatedAt = 'UPDATED_AT'
-  
-}
-
-export enum VoterOrderEnum {  
-  /** Citizen */
-  Citizen = 'CITIZEN',
-  /** Created At */
-  CreatedAt = 'CREATED_AT',
-  /** Election */
-  Election = 'ELECTION',
-  /** Name */
-  Name = 'NAME',
-  /** Polling Station */
-  PollingStation = 'POLLING_STATION',
-  /** Updated At */
-  UpdatedAt = 'UPDATED_AT'
-  
-}
-
-export enum VoterRoleOrderEnum {  
-  /** Created At */
-  CreatedAt = 'CREATED_AT',
-  /** Name */
-  Name = 'NAME',
-  /** Updated At */
-  UpdatedAt = 'UPDATED_AT'
-  
-}
-
-export enum WardOrderEnum {  
-  /** Created At */
-  CreatedAt = 'CREATED_AT',
-  /** Local Authority */
-  LocalAuthority = 'LOCAL_AUTHORITY',
   /** Name */
   Name = 'NAME',
   /** Updated At */
