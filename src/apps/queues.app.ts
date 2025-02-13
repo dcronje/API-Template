@@ -12,7 +12,7 @@ const queues = QueueRegistry.shared().getQueues()
 const { router } = createBullBoard(queues.map((queue) => new BullAdapter(queue)))
 
 queuesApp.use('/', (req, res, next) => {
-  const admin = { name: 'admin@wms.co.za', password: 'Uc00kT3ch' }
+  const admin = { name: 'admin@wms.co.za', password: 'mypassword' }// Change me!!!
   const user = auth(req)
   if (!user || !admin.name || admin.password !== user.pass) {
     res.set('WWW-Authenticate', 'Basic realm="example"')

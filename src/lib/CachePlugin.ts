@@ -359,7 +359,8 @@ const validateCacheForKeys = (cacheValue: CacheValue, clearKeys?: { type: string
   if (clearKeys && userId) {
     const { cacheKeys, userId: cachedUserId } = cacheValue
     if (cachedUserId == userId) {
-      clearKeys.forEach((clearKey) => {
+      for (let c = 0; c < clearKeys.length; c++) {
+        const clearKey = clearKeys[c]
         if (clearKey.id) {
           const hasItem = cacheKeys.find((cacheKey) => cacheKey.type === clearKey.type && cacheKey.id === clearKey.id)
           if (hasItem) {
@@ -371,11 +372,12 @@ const validateCacheForKeys = (cacheValue: CacheValue, clearKeys?: { type: string
             return true
           }
         }
-      })
+      }
     }
   } else if (clearKeys) {
     const { cacheKeys } = cacheValue
-    clearKeys.forEach((clearKey) => {
+    for (let c = 0; c < clearKeys.length; c++) {
+      const clearKey = clearKeys[c]
       if (clearKey.id) {
         const hasItem = cacheKeys.find((cacheKey) => cacheKey.type === clearKey.type && cacheKey.id === clearKey.id)
         if (hasItem) {
@@ -387,7 +389,7 @@ const validateCacheForKeys = (cacheValue: CacheValue, clearKeys?: { type: string
           return true
         }
       }
-    })
+    }
   } else if (userId) {
     const { userId: cachedUserId } = cacheValue
     if (cachedUserId == userId) {
